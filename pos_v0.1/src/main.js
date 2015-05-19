@@ -18,7 +18,7 @@ function printInventory(inputs) {
             temp.count=count;
             temp.unit=unit;
             temp.price=price;
-            list.push(temp);
+            list.push(temp);  
         }
     }
     var info="***<没钱赚商店>购物清单***"+"\n";
