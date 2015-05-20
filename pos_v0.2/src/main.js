@@ -14,7 +14,7 @@ function printInventory(inputs) {
         }
     }
     var carlist=[];
-    for (var h=0;h<list.length;h++) {
+    for (var h=0; h<list.length; h++) {
         var count=1;
         var temp_1={};
         var name=list[h].name;
