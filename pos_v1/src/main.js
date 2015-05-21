@@ -2,9 +2,7 @@ function printInventory(inputs){
     var list =[];
     var allItems = loadAllItems();
     var promotions = loadPromotions();
-    if(inputs.length>10) {
-        count = inputs[i].substring(inputs[i].indexOf("-") + 1);
-    }
+
     for(var i=0; i<inputs.length; i++) {
         var temp={};
         for(var k=0; k< allItems.length; k++) {
@@ -52,7 +50,7 @@ function printInventory(inputs){
     var prolist = [];
     var sale = 0;
     var saleprice = 0;
-    var promoinfo;
+    var promoinfo="";
     for(var a=0; a<carlist.length; a++) {
         subtotal[a] = carlist[a].count * carlist[a].price;
         for(var b=0; b<promotions[0].barcodes.length; b++){
@@ -65,6 +63,9 @@ function printInventory(inputs){
             }
         }
         var digitsubtotal=subtotal[a];
+        if(inputs.length>10) {
+            count = inputs[i].substring(inputs[i].indexOf("-") + 1);
+        }
         info += "名称：" + carlist[a].name + "，" +
                 "数量：" + carlist[a].count + carlist[a].unit + "，" +
                 "单价：" + carlist[a].price.toFixed(2) + "(元)，"+
@@ -72,9 +73,9 @@ function printInventory(inputs){
         sum += (carlist[a].price * carlist[a].count);
 
     }
-	info += "----------------------" + "\n" + "'挥泪赠送商品：" + "\n" ;
+	info += "----------------------" + "\n" + "'挥泪赠送商品:\n" + promoinfo;
 
-    info += promoinfo+ "----------------------\n" +
+    info += "----------------------\n" +
             "总计：" + sum + "(元)\n" + "节省：" + saleprice.toFixed(2) + "(元)\n" +
             "**********************";
     console.log(info);
