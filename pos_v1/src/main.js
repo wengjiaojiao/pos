@@ -7,8 +7,8 @@ function printInventory(inputs){
             var location = inputs[i].indexOf("-");
         }
         for(var k=0; k< allItems.length; k++) {
-            inputs[i] = inputs[i].substring(0,location);
-            if(inputs[i] === allItems[k].barcode) {
+            var inputs1 = inputs[i].substring(0,location);
+            if(inputs1 === allItems[k].barcode) {
             var newitem = {
              name : allItems[k].name,
              unit : allItems[k].unit,
