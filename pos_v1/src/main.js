@@ -10,10 +10,12 @@ function printInventory(inputs){
         for(var k=0; k< allItems.length; k++) {
             inputs[i] = "ITEM00000" + parseInt(inputs[i].substring(9));
             if(inputs[i] === allItems[k].barcode) {
-             temp.name = allItems[k].name;
-             temp.unit = allItems[k].unit;
-             temp.price = allItems[k].price;
-             temp.barcodes = allItems[k].barcode;
+            var temp = {
+             name : allItems[k].name,
+             unit : allItems[k].unit,
+             price : allItems[k].price,
+             barcodes : allItems[k].barcode,
+             };
              list.push(temp);
             }
         }
@@ -50,30 +52,28 @@ function printInventory(inputs){
     var prolist = [];
     var sale = 0;
     var saleprice = 0;
+    var info1;
     for(var a=0; a<carlist.length; a++) {
         subtotal[a] = carlist[a].count * carlist[a].price;
         for(var b=0; b<promotions[0].barcodes.length; b++){
             if(carlist[a].barcodes == promotions[0].barcodes[b]) {
                 carlist[a].sale = carlist[a].sale - parseInt(carlist[a].sale / 3);
-				info += "名称：" + carlist[a].name + "，" +
+				info1 += "名称：" + carlist[a].name + "，" +
                         "数量：" + (carlist[a].count - carlist[a].sale) + carlist[a].unit + "\n";
                 saleprice += (carlist[a].count - carlist[a].sale) * carlist[a].price;
                 subtotal[a] -= subtotal[a]-carlist[a].sale * carlist[a].price;
             }
         }
-    }
-    for(var x=0; x<carlist.length; x++) {
-        var digitsubtotal=subtotal[x];
-        info += "名称：" + carlist[x].name + "，" +
-                "数量：" + carlist[x].count + carlist[x].unit + "，" +
-                "单价：" + carlist[x].price.toFixed(2) + "(元)，"+
+        var digitsubtotal=subtotal[a];
+        info += "名称：" + carlist[a].name + "，" +
+                "数量：" + carlist[a].count + carlist[a].unit + "，" +
+                "单价：" + carlist[a].price.toFixed(2) + "(元)，"+
                 "小计：" + digitsubtotal.toFixed(2)+"(元)"+"\n";
-        sum += (carlist[x].price * carlist[x].count);
-
+        sum += (carlist[a].price * carlist[a].count);
     }
-	info += "----------------------" + "\n" + "'挥泪赠送商品：" + "\n";
+	info += "----------------------" + "\n" + "'挥泪赠送商品：" + "\n" ;
 
-    info += "----------------------\n" +
+    info += info1+ "----------------------\n" +
             "总计：" + sum + "(元)\n" + "节省：" + saleprice.toFixed(2) + "(元)\n" +
             "**********************";
     console.log(info);
