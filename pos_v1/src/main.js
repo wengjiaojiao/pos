@@ -2,11 +2,12 @@ function printInventory(inputs){
     var list =[];
     var allItems = loadAllItems();
     var promotions = loadPromotions();
-
     for(var i=0; i<inputs.length; i++) {
-        var newitem={};
+        if(inputs[i].length>10){
+            var location = inputs[i].indexOf("-");
+        }
         for(var k=0; k< allItems.length; k++) {
-            inputs[i] = "ITEM00000" + parseInt(inputs[i].substring(9));
+            inputs[i] = inputs[i].substring(0,location);
             if(inputs[i] === allItems[k].barcode) {
             var newitem = {
              name : allItems[k].name,
@@ -20,8 +21,8 @@ function printInventory(inputs){
     }
     var carlist = [];
     for (var h=0; h<list.length; h++) {
-        var count = 1;
-        var newitem_1 = {};
+        var count = inputs[h].length>10 ? inputs[h].substring(inputs[h].indexOf("-") + 1) :1;
+        var newitem_sale = {};
         var name = list[h].name;
         var unit = list[h].unit;
         var price = list[h].price;
@@ -35,13 +36,15 @@ function printInventory(inputs){
             }
         }
         if(!exist) {
-            newitem_1.name = name;
-            newitem_1.count = count;
-            newitem_1.unit = unit;
-            newitem_1.price = price;
-            newitem_1.sale = count;
-            newitem_1.barcodes = barcodes;
-            carlist.push(newitem_1);
+            var newitem_sale = {
+                name : name,
+                count : count,
+                unit : unit,
+                price : price,
+                sale : count,
+                barcodes : barcodes
+            };
+            carlist.push(newitem_sale);
         }
     }
     var info = "***<没钱赚商店>购物清单***" + "\n";
@@ -63,20 +66,18 @@ function printInventory(inputs){
             }
         }
         var digitsubtotal=subtotal[a];
-        if(inputs[a].length>10) {
-            carlist[a].count = inputs[i].substring(inputs[i].indexOf("-") + 1);
-        }
         info += "名称：" + carlist[a].name + "，" +
                 "数量：" + carlist[a].count + carlist[a].unit + "，" +
                 "单价：" + carlist[a].price.toFixed(2) + "(元)，"+
                 "小计：" + digitsubtotal.toFixed(2)+"(元)"+"\n";
         sum += (carlist[a].price * carlist[a].count);
-
     }
-	info += "----------------------" + "\n" + "'挥泪赠送商品:\n" + promoinfo;
+       sum -= saleprice;
+
+	info += "----------------------" + "\n" + "挥泪赠送商品:\n" + promoinfo;
 
     info += "----------------------\n" +
-            "总计：" + sum + "(元)\n" + "节省：" + saleprice.toFixed(2) + "(元)\n" +
+            "总计：" + sum.toFixed(2) + "(元)\n" + "节省：" + saleprice.toFixed(2) + "(元)\n" +
             "**********************";
     console.log(info);
 }
