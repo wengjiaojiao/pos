@@ -4,24 +4,24 @@ function printInventory(inputs){
     var promotions = loadPromotions();
 
     for(var i=0; i<inputs.length; i++) {
-        var temp={};
+        var newitem={};
         for(var k=0; k< allItems.length; k++) {
             inputs[i] = "ITEM00000" + parseInt(inputs[i].substring(9));
             if(inputs[i] === allItems[k].barcode) {
-            var temp = {
+            var newitem = {
              name : allItems[k].name,
              unit : allItems[k].unit,
              price : allItems[k].price,
              barcodes : allItems[k].barcode,
              };
-             list.push(temp);
+             list.push(newitem);
             }
         }
     }
     var carlist = [];
     for (var h=0; h<list.length; h++) {
         var count = 1;
-        var temp_1 = {};
+        var newitem_1 = {};
         var name = list[h].name;
         var unit = list[h].unit;
         var price = list[h].price;
@@ -35,13 +35,13 @@ function printInventory(inputs){
             }
         }
         if(!exist) {
-            temp_1.name = name;
-            temp_1.count = count;
-            temp_1.unit = unit;
-            temp_1.price = price;
-            temp_1.sale = count;
-            temp_1.barcodes = barcodes;
-            carlist.push(temp_1);
+            newitem_1.name = name;
+            newitem_1.count = count;
+            newitem_1.unit = unit;
+            newitem_1.price = price;
+            newitem_1.sale = count;
+            newitem_1.barcodes = barcodes;
+            carlist.push(newitem_1);
         }
     }
     var info = "***<没钱赚商店>购物清单***" + "\n";
@@ -63,8 +63,8 @@ function printInventory(inputs){
             }
         }
         var digitsubtotal=subtotal[a];
-        if(inputs.length>10) {
-            count = inputs[i].substring(inputs[i].indexOf("-") + 1);
+        if(inputs[a].length>10) {
+            carlist[a].count = inputs[i].substring(inputs[i].indexOf("-") + 1);
         }
         info += "名称：" + carlist[a].name + "，" +
                 "数量：" + carlist[a].count + carlist[a].unit + "，" +
