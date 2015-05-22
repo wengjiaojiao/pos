@@ -70,7 +70,7 @@ function printInventory(inputs){
             }
         }
         var digitsubtotal=subtotal[a];
-        
+
         info += "名称：" + carlist[a].name + "，" +
                 "数量：" + carlist[a].count + carlist[a].unit + "，" +
                 "单价：" + carlist[a].price.toFixed(2) + "(元)，"+
@@ -82,7 +82,8 @@ function printInventory(inputs){
 	info += "----------------------" + "\n" + "挥泪赠送商品：\n" + promoinfo;
 
     info += "----------------------\n" +
-            "总计：" + sum.toFixed(2) + "(元)\n" + "节省：" + saleprice.toFixed(2) + "(元)\n" +
+            "总计：" + sum.toFixed(2) + "(元)\n" +
+            "节省：" + saleprice.toFixed(2) + "(元)\n" +
             "**********************";
     console.log(info);
 }
