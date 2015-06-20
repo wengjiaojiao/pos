@@ -1,4 +1,8 @@
 var inputs = require('../../spec/main_spec');
+var $ = require('../../spec/fixtures');
+var Item = require('./item');
+var cal_sum_price = require('./get_sum_price.js');
+var CartItem = require('./cartItem');
 
 function Scanner(inputs) {
     this.inputs = inputs;
@@ -23,7 +27,31 @@ Scanner.prototype.split_group_tag = function() {
         }).value());
 
     }
-    return group_item;
+    //return group_item;
+    var shop_cart = [];
+    var a;
+    var that = this;
+    each(group_item,function(key, value) {
+        shop_cart.push(that.map_tag(key, value));
+    });
+
+    // each(shop_cart,function(value, key) {
+    //     shop_cart[key].sum_price = cal_sum_price(value,shop_cart);
+    // });
+    return shop_cart;
+}
+
+Scanner.prototype.map_tag = function(key, value) {
+    var allItems = $.loadAllItems();
+
+    each(allItems,function (allItem) {
+
+        if (value === allItem.barcode) {
+            result = new CartItem(allItem, key);
+        }
+    });
+
+    return result;
 }
 
 function each(collection,fun) {
