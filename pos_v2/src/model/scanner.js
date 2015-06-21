@@ -19,7 +19,7 @@ Scanner.prototype.split_group_tag = function() {
             if(n.indexOf("-") === -1) {
                 temp[key][i] = 1;
             }else
-            temp[key][i] = parseInt(n.split('-')[1]);
+            temp[key][i] = parseFloat(n.split('-')[1]);
         })
 
         group_item[key] = (_(temp[key]).reduce(function(a, b) {
@@ -29,7 +29,6 @@ Scanner.prototype.split_group_tag = function() {
     }
     //return group_item;
     var shop_cart = [];
-    var a;
     var that = this;
     each(group_item,function(key, value) {
         shop_cart.push(that.map_tag(key, value));
@@ -43,15 +42,15 @@ Scanner.prototype.split_group_tag = function() {
 
 Scanner.prototype.map_tag = function(key, value) {
     var allItems = $.loadAllItems();
-
+    var cartitem;
     each(allItems,function (allItem) {
 
         if (value === allItem.barcode) {
-            result = new CartItem(allItem, key);
+            cartitem = new CartItem(allItem, key);
         }
     });
 
-    return result;
+    return cartitem;
 }
 
 function each(collection,fun) {
