@@ -1,35 +1,19 @@
+var Scanner = require('./model/scanner');
+var inputs = require('../spec/main_spec');
+var Pos =  require('./model/pos');
+var Dateformatter = require('./tools/dateformatter');
+
 function printInventory(inputs){
-    var dateDigitToString;
+    // var group_item = get_group_item(inputs);
+    // var shop_cart = get_whole_item(group_item);
+    // return  get_gift_item(shop_cart);
+    // /return get_info(shop_cart,gift_cart);
+    var scanner = new Scanner(inputs);
+    var cartitem = scanner.split_group_tag();
+    //return cartitem;
+    var pos = new Pos();
+    return pos.getInfo(cartitem);
 
-    dateDigitToString = function (num) {
-        return num < 10 ? '0' + num : num;
-    };
-    var currentDate = new Date(),
-        year = dateDigitToString(currentDate.getFullYear()),
-        month = dateDigitToString(currentDate.getMonth() + 1),
-        date = dateDigitToString(currentDate.getDate()),
-        hour = dateDigitToString(currentDate.getHours()),
-        minute = dateDigitToString(currentDate.getMinutes()),
-        second = dateDigitToString(currentDate.getSeconds()),
-        formattedDateString = year + '年' + month + '月' + date + '日 ' + hour + ':' + minute + ':' + second;
-        //console.log(formattedDateString);
-        var new_inputs = [];
-
-        for(var i=0;i<inputs.length;i++) {
-            var count = inputs[i].length>10 ? inputs[i].substring(inputs[i].indexOf("-") + 1) :1;
-            var barcode = inputs[i];
-            var exist = false;
-            for(var j=0;j<new_inputs.length;j++) {
-                if(barcode === new_inputs[j].barcode){
-                    new_inputs[j].count += count;
-                    exist = true;
-                }
-            }
-            if(!exist) {
-                var temp = {};
-                temp.barcode = barcode;
-                temp.count = count;
-                new_inputs.push(temp);
-            }
-        }
 }
+
+module.exports = printInventory;
