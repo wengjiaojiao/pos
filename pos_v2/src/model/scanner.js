@@ -1,7 +1,6 @@
 var inputs = require('../../spec/main_spec');
-var $ = require('../../spec/fixtures');
+var fixtures = require('../../spec/fixtures');
 var Item = require('./item');
-var cal_sum_price = require('./get_sum_price.js');
 var CartItem = require('./cartItem');
 
 function Scanner(inputs) {
@@ -41,7 +40,7 @@ Scanner.prototype.split_group_tag = function() {
 }
 
 Scanner.prototype.map_tag = function(key, value) {
-    var allItems = $.loadAllItems();
+    var allItems = fixtures.loadAllItems();
     var cartitem;
     each(allItems,function (allItem) {
 
