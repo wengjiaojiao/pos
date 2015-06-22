@@ -26,16 +26,13 @@ Scanner.prototype.split_group_tag = function() {
         }).value());
 
     }
-    //return group_item;
     var shop_cart = [];
     var that = this;
+
     each(group_item,function(key, value) {
         shop_cart.push(that.map_tag(key, value));
     });
 
-    // each(shop_cart,function(value, key) {
-    //     shop_cart[key].sum_price = cal_sum_price(value,shop_cart);
-    // });
     return shop_cart;
 }
 
