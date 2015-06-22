@@ -4,21 +4,28 @@ function Promotion(type, barcodes) {
     this.type = type;
     this.barcodes = barcodes || [];
 }
-Promotion.prototype.getPromotionMessage = function(cartitem) {
+Promotion.prototype.getPromotionMessage = function(cartitems) {
     var promotions = fixtures.loadPromotions();
     var promotionitems = [];
     var promotionitem;
 
-    each(promotions[0].barcodes, function(promotion,key) {
-        each(cartitem, function(value, key) {
+    each(promotions[0].barcodes, function(promotion, key) {
+        each(cartitems, function(value, key) {
             if(value.item.barcode === promotion) {
-                value.count = parseInt(value.count / 3);
                 promotionitems.push(value);
             }
         });
     });
-
     return promotionitems;
+}
+
+Promotion.prototype.getPromotionCount = function(promotionitems) {
+    var promotioncount = [];
+
+    each(promotionitems,function(promotionitem) {
+        promotioncount.push(parseInt(promotionitem.count / 3));
+    })
+    return promotioncount;
 }
 
 function each(collection,fun) {
@@ -26,7 +33,7 @@ function each(collection,fun) {
         for (var i = 0; i < collection.length; i++) {
             fun(collection[i], i);
         }
-    }else {
+    } else {
         for (var key in collection) {
             fun(collection[key], key);
         }
