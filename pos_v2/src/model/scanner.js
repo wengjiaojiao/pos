@@ -22,14 +22,14 @@ Scanner.prototype.split_group_tag = function() {
         }).value());
 
     }
-    var shop_cart = [];
+    var get_group_item = [];
     var that = this;
 
     each(group_item,function(key, value) {
-        shop_cart.push(that.map_tag(key, value));
+        get_group_item.push(that.map_tag(key, value));
     });
 
-    return shop_cart;
+    return get_group_item;
 }
 
 Scanner.prototype.map_tag = function(key, value) {
