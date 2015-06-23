@@ -6,23 +6,23 @@ function Promotion(type, barcodes) {
 }
 Promotion.prototype.getPromotionMessage = function(cartitems) {
     var promotions = fixtures.loadPromotions();
-    var promotionitems = [];
+    var promotionItems = [];
     var promotionitem;
 
     each(promotions[0].barcodes, function(promotion, key) {
         each(cartitems, function(value, key) {
             if(value.item.barcode === promotion) {
-                promotionitems.push(value);
+                promotionItems.push(value);
             }
         });
     });
-    return promotionitems;
+    return promotionItems;
 }
 
-Promotion.prototype.getPromotionCount = function(promotionitems) {
+Promotion.prototype.getPromotionCount = function(promotionItems) {
     var promotioncount = [];
 
-    each(promotionitems,function(promotionitem) {
+    each(promotionItems,function(promotionitem) {
         promotioncount.push(parseInt(promotionitem.count / 3));
     })
     return promotioncount;
