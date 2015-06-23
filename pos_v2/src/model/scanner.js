@@ -7,42 +7,42 @@ function Scanner(inputs) {
     this.inputs = inputs;
 }
 
-Scanner.prototype.split_group_tag = function() {
+Scanner.prototype.splitGroupTag = function() {
     var temp = (_(this.inputs).group(function(n,i) {
        return n.split("-")[0];
     }).value());
 
-    var group_item = {};
+    var groupItem = {};
     for(var key in temp) {
         _(temp[key]).map(function(n, i) {
             temp[key][i] = n.indexOf("-") === -1 ? 1 : parseFloat(n.split('-')[1]);
         })
-        group_item[key] = (_(temp[key]).reduce(function(a, b) {
+        groupItem[key] = (_(temp[key]).reduce(function(a, b) {
             return a + b;
         }).value());
 
     }
-    var get_group_item = [];
+    var getGroupItem = [];
     var that = this;
 
-    each(group_item,function(key, value) {
-        get_group_item.push(that.map_tag(key, value));
+    each(groupItem,function(key, value) {
+        getGroupItem.push(that.mapTag(key, value));
     });
 
-    return get_group_item;
+    return getGroupItem;
 }
 
-Scanner.prototype.map_tag = function(key, value) {
+Scanner.prototype.mapTag = function(key, value) {
     var allItems = fixtures.loadAllItems();
-    var cartitem;
+    var cartItem;
     each(allItems,function(allItem) {
 
         if (value === allItem.barcode) {
-            cartitem = new CartItem(allItem, key);
+            cartItem = new CartItem(allItem, key);
         }
     });
 
-    return cartitem;
+    return cartItem;
 }
 
 function each(collection,fun) {
