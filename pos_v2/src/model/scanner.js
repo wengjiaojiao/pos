@@ -15,12 +15,8 @@ Scanner.prototype.split_group_tag = function() {
     var group_item = {};
     for(var key in temp) {
         _(temp[key]).map(function(n, i) {
-            if(n.indexOf("-") === -1) {
-                temp[key][i] = 1;
-            }else
-            temp[key][i] = parseFloat(n.split('-')[1]);
+            temp[key][i] = n.indexOf("-") === -1 ? 1 : parseFloat(n.split('-')[1]);
         })
-
         group_item[key] = (_(temp[key]).reduce(function(a, b) {
             return a + b;
         }).value());
