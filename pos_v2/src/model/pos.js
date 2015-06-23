@@ -3,7 +3,7 @@ var Dateformatter = require('../tools/dateformatter');
 function Pos() {
 
 }
-Pos.prototype.getInfo = function (cartitems, subtotal, promotionitems,promotioncount) {
+Pos.prototype.getInfo = function(cartitems, subtotal, promotionitems,promotioncount) {
     var getdate = new Dateformatter().getDate();
     var result;
     result = '***<没钱赚商店>购物清单***\n' +
@@ -27,7 +27,7 @@ Pos.prototype.getInfo = function (cartitems, subtotal, promotionitems,promotionc
     return result;
 }
 
-Pos.prototype.getTotal = function (cartitems, subtotals) {
+Pos.prototype.getTotal = function(cartitems, subtotals) {
     var total = 0;
     var lastTotal = 0;
     var save = 0;
