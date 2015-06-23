@@ -17,9 +17,9 @@ Scanner.prototype.splitGroupTag = function() {
         temp[key].map(function(n, i) {
             temp[key][i] = n.indexOf("-") === -1 ? 1 : parseFloat(n.split('-')[1]);
         })
-        groupItem[key] = (_(temp[key]).reduce(function(a, b) {
+        groupItem[key] = temp[key].reduce(function(a, b) {
             return a + b;
-        }).value());
+        });
 
     }
     var getGroupItem = [];
@@ -36,7 +36,6 @@ Scanner.prototype.mapTag = function(key, value) {
     var allItems = fixtures.loadAllItems();
     var cartItem;
     allItems.forEach(function(allItem) {
-
         if (value === allItem.barcode) {
             cartItem = new CartItem(allItem, key);
         }
@@ -72,18 +71,6 @@ _.prototype = {
         this.each(function(n, i) {
             result[fun(n, i)] = result[fun(n, i)] || [];
             result[fun(n, i)].push(n);
-        });
-        this.collection = result;
-        return this;
-    },
-    reduce:function(fun) {
-        var result = this.collection[0];
-        this.each(function(n, i) {
-            if(i === 0) {
-                result = n;
-            }else {
-                result = fun(result,n);
-            }
         });
         this.collection = result;
         return this;
