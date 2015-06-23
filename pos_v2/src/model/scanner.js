@@ -14,7 +14,7 @@ Scanner.prototype.splitGroupTag = function() {
 
     var groupItem = {};
     for(var key in temp) {
-        _(temp[key]).map(function(n, i) {
+        temp[key].map(function(n, i) {
             temp[key][i] = n.indexOf("-") === -1 ? 1 : parseFloat(n.split('-')[1]);
         })
         groupItem[key] = (_(temp[key]).reduce(function(a, b) {
@@ -72,14 +72,6 @@ _.prototype = {
         this.each(function(n, i) {
             result[fun(n, i)] = result[fun(n, i)] || [];
             result[fun(n, i)].push(n);
-        });
-        this.collection = result;
-        return this;
-    },
-    map:function(fun) {
-        var result = [];
-        this.each(function(n, i) {
-            result.push(fun(n, i));
         });
         this.collection = result;
         return this;
