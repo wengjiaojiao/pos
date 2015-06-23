@@ -8,7 +8,7 @@ function Scanner(inputs) {
 }
 
 Scanner.prototype.split_group_tag = function() {
-    var temp = (_(this.inputs).group(function (n,i) {
+    var temp = (_(this.inputs).group(function(n,i) {
        return n.split("-")[0];
     }).value());
 
