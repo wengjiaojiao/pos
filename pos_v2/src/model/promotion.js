@@ -4,13 +4,13 @@ function Promotion(type, barcodes) {
     this.type = type;
     this.barcodes = barcodes || [];
 }
-Promotion.prototype.getPromotionMessage = function(cartitems) {
+Promotion.prototype.getPromotionMessage = function(cartItems) {
     var promotions = fixtures.loadPromotions();
     var promotionItems = [];
-    var promotionitem;
+    var promotionItem;
 
     each(promotions[0].barcodes, function(promotion, key) {
-        each(cartitems, function(value, key) {
+        each(cartItems, function(value, key) {
             if(value.item.barcode === promotion) {
                 promotionItems.push(value);
             }
@@ -20,12 +20,12 @@ Promotion.prototype.getPromotionMessage = function(cartitems) {
 }
 
 Promotion.prototype.getPromotionCount = function(promotionItems) {
-    var promotioncount = [];
+    var promotionCount = [];
 
-    each(promotionItems,function(promotionitem) {
-        promotioncount.push(parseInt(promotionitem.count / 3));
+    each(promotionItems,function(promotionItem) {
+        promotionCount.push(parseInt(promotionItem.count / 3));
     })
-    return promotioncount;
+    return promotionCount;
 }
 
 function each(collection,fun) {
