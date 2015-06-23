@@ -35,7 +35,7 @@ Scanner.prototype.splitGroupTag = function() {
 Scanner.prototype.mapTag = function(key, value) {
     var allItems = fixtures.loadAllItems();
     var cartItem;
-    each(allItems,function(allItem) {
+    allItems.forEach(function(allItem) {
 
         if (value === allItem.barcode) {
             cartItem = new CartItem(allItem, key);
