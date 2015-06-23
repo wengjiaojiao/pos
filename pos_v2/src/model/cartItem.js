@@ -10,7 +10,7 @@ CartItem.prototype.getSubtotal = function(cartitems) {
     var promotions = fixtures.loadPromotions();
     var that = this;
 
-    each(cartitems, function(cartitem, key) {
+    cartitems.forEach(function(cartitem, key) {
         subtotal.push((cartitem.item.price * cartitem.count) - that.getCartItemPrice(cartitem));
     });
 
@@ -21,7 +21,7 @@ CartItem.prototype.getCartItemPrice = function(cartitem) {
     var promotionprice = 0;
     var promotions = fixtures.loadPromotions();
 
-    each(promotions[0].barcodes, function(promotion){
+    promotions[0].barcodes.forEach(function(promotion){
         if(cartitem.item.barcode === promotion) {
             promotionprice = parseInt(cartitem.count/3) * cartitem.item.price;
         }
@@ -30,15 +30,4 @@ CartItem.prototype.getCartItemPrice = function(cartitem) {
     return promotionprice;
 }
 
-function each(collection,fun) {
-    if (Array.isArray(collection)) {
-        for (var i = 0; i < collection.length; i++) {
-            fun(collection[i], i);
-        }
-    }else {
-        for (var key in collection) {
-            fun(collection[key], key);
-        }
-    }
-}
 module.exports = CartItem;
