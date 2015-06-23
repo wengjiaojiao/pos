@@ -4,13 +4,13 @@ function Promotion(type, barcodes) {
     this.type = type;
     this.barcodes = barcodes || [];
 }
-Promotion.prototype.getPromotionMessage = function(cartItems) {
+Promotion.prototype.getPromotionMessage = function(cartItem) {
     var promotions = fixtures.loadPromotions();
     var promotionItems = [];
     var promotionItem;
 
     each(promotions[0].barcodes, function(promotion, key) {
-        each(cartItems, function(value, key) {
+        each(cartItem, function(value, key) {
             if(value.item.barcode === promotion) {
                 promotionItems.push(value);
             }
