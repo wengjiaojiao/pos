@@ -9,8 +9,8 @@ Promotion.prototype.getPromotionMessage = function(cartItem) {
     var promotionItems = [];
     var promotionItem;
 
-    each(promotions[0].barcodes, function(promotion, key) {
-        each(cartItem, function(value, key) {
+    promotions[0].barcodes.forEach(function(promotion, key) {
+        cartItem.forEach(function(value, key) {
             if(value.item.barcode === promotion) {
                 promotionItems.push(value);
             }
@@ -22,22 +22,10 @@ Promotion.prototype.getPromotionMessage = function(cartItem) {
 Promotion.prototype.getPromotionCount = function(promotionItems) {
     var promotionCount = [];
 
-    each(promotionItems,function(promotionItem) {
+    promotionItems.forEach(function(promotionItem) {
         promotionCount.push(parseInt(promotionItem.count / 3));
-    })
+    });
     return promotionCount;
-}
-
-function each(collection,fun) {
-    if (Array.isArray(collection)) {
-        for (var i = 0; i < collection.length; i++) {
-            fun(collection[i], i);
-        }
-    } else {
-        for (var key in collection) {
-            fun(collection[key], key);
-        }
-    }
 }
 
 module.exports = Promotion;
