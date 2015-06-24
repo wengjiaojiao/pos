@@ -1,7 +1,7 @@
 function Util() {
 
 }
-Util.prototype.getDate = function() {
+Util.getDate = function() {
 
     dateDigitToString = function(num) {
         return num < 10 ? '0' + num : num;
@@ -19,4 +19,3 @@ Util.prototype.getDate = function() {
 
     return formattedDateString;
 }
-module.exports = Util;
