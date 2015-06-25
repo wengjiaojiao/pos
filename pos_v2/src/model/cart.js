@@ -1,31 +1,17 @@
-var fixtures = require('../../spec/fixtures');
-
 function Cart() {
-
-}
-Cart.prototype.getSubtotal = function(cartitems) {
-    var subtotal = [];
-    var promotions = fixtures.loadPromotions();
-    var that = this;
-
-    cartitems.forEach(function(cartitem, key) {
-        subtotal.push((cartitem.item.price * cartitem.count) - that.getCartItemPrice(cartitem));
-    });
-
-    return subtotal;
+    this.cartBasket = [];
 }
 
-Cart.prototype.getCartItemPrice = function(cartitem) {
-    var promotionprice = 0;
-    var promotions = fixtures.loadPromotions();
+Cart.prototype.addCartItem = function(cartitem) {
+    var exist = false;
 
-    promotions[0].barcodes.forEach(function(promotion){
-        if(cartitem.item.barcode === promotion) {
-            promotionprice = parseInt(cartitem.count/3) * cartitem.item.price;
+    this.cartBasket.forEach(function(tag) {
+        if (tag.barcode === cartitem.barcode) {
+            tag.count += cartitem.count;
+            exist = true;
         }
-    });
-
-    return promotionprice;
+    })
+    if (!exist) {
+        this.cartBasket.push(new CartItem(cartitem.barcode, cartitem.count));
+    }
 }
-
-module.exports = Cart;

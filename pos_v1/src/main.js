@@ -1,8 +1,4 @@
-function printInventory(inputs){
-    var list =[];
-    var allItems = loadAllItems();
-    var promotions = loadPromotions();
-
+function create_newitem(list, allItems, inputs) {
     for(var i=0; i<inputs.length; i++) {
         if(inputs[i].length>10){
             var location = inputs[i].indexOf("-");
@@ -21,7 +17,8 @@ function printInventory(inputs){
             }
         }
     }
-    var carlist = [];
+}
+function create_carlist(carlist,list,inputs){
     for (var h=0; h<list.length; h++) {
         var count = inputs[h].length>10 ? inputs[h].substring(inputs[h].indexOf("-") + 1) :1;
         var newitem_sale = {};
@@ -50,6 +47,8 @@ function printInventory(inputs){
             carlist.push(newitem_sale);
         }
     }
+}
+function show_info(carlist,promotions){
     var info = "***<没钱赚商店>购物清单***" + "\n";
     var sum = 0;
     var subtotal = [];
@@ -57,7 +56,6 @@ function printInventory(inputs){
     var sale = 0;
     var saleprice = 0;
     var promoinfo="";
-
     for(var a=0; a<carlist.length; a++) {
         subtotal[a] = carlist[a].count * carlist[a].price;
         for(var b=0; b<promotions[0].barcodes.length; b++){
@@ -77,13 +75,23 @@ function printInventory(inputs){
                 "小计：" + digitsubtotal.toFixed(2)+"(元)"+"\n";
         sum += (carlist[a].price * carlist[a].count);
     }
-       sum -= saleprice;
-
-	info += "----------------------" + "\n" + "挥泪赠送商品：\n" + promoinfo;
+    sum -= saleprice;
+    info += "----------------------" + "\n" + "挥泪赠送商品：\n" + promoinfo;
 
     info += "----------------------\n" +
             "总计：" + sum.toFixed(2) + "(元)\n" +
             "节省：" + saleprice.toFixed(2) + "(元)\n" +
             "**********************";
-    console.log(info);
+            console.log(info);
+}
+function printInventory(inputs){
+    var list =[];
+    var allItems = loadAllItems();
+    var promotions = loadPromotions();
+    var carlist = [];
+
+    create_newitem(list, allItems, inputs);
+    create_carlist(carlist,list,inputs);
+    show_info(carlist,promotions);
+
 }
